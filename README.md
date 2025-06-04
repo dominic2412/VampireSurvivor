@@ -12,10 +12,11 @@ This repository contains a basic project setup for a simple Vampire Survivor sty
 
 ## Setup
 
-Install dependencies:
+Install dependencies. Using `python -m pip` ensures the packages install into the
+same interpreter you will use to launch the game:
 
 ```bash
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
 Run the game:
@@ -24,5 +25,9 @@ Run the game:
 python src/main.py
 ```
 
-Use the arrow keys to move the player.  Enemies will chase you and bullets are
-fired automatically.  Colliding with an enemy ends the game.
+Use the arrow keys to move the player.  Enemies spawn from the edges of the
+screen and chase you while bullets are fired automatically.  Each defeated enemy
+adds to your score displayed in the corner.  Colliding with an enemy ends the
+game.
+
+
