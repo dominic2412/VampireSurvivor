@@ -10,6 +10,7 @@ from game.enemy import Enemy
 from game.utils import handle_bullet_enemy_collisions
 
 
+
 def test_bullet_moves_up():
     b = Bullet((10, 10), speed=5)
     initial_y = b.rect.y
@@ -28,6 +29,5 @@ def test_collision_returns_score_increment():
     enemies = pygame.sprite.Group(Enemy((0, 0)))
     killed = handle_bullet_enemy_collisions(bullets, enemies)
     assert killed == 1
-
 
 pygame.quit()

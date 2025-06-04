@@ -29,3 +29,5 @@ Use the arrow keys to move the player.  Enemies spawn from the edges of the
 screen and chase you while bullets are fired automatically.  Each defeated enemy
 adds to your score displayed in the corner.  Colliding with an enemy ends the
 game.
+
+
