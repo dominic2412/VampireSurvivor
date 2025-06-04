@@ -11,6 +11,7 @@ from game.player import Player
 from game.utils import handle_bullet_enemy_collisions, handle_player_enemy_collisions
 
 
+
 def test_bullet_moves_up():
     b = Bullet((10, 10), speed=5)
     initial_y = b.rect.y
@@ -37,6 +38,5 @@ def test_player_takes_damage_on_collision():
     collided = handle_player_enemy_collisions(player, enemies)
     assert collided
     assert player.health == 2
-
 
 pygame.quit()

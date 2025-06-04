@@ -9,6 +9,7 @@ from game.utils import (
 )
 
 
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode((800, 600))
@@ -55,6 +56,7 @@ def main():
                         screen.get_width() + 20,
                         random.randint(0, screen.get_height()),
                     )
+
                 enemies.add(Enemy(position))
             elif event.type == bullet_spawn_event:
                 bullets.add(Bullet(player.rect.center))
@@ -67,6 +69,7 @@ def main():
         score += handle_bullet_enemy_collisions(bullets, enemies)
 
         if handle_player_enemy_collisions(player, enemies) and player.health <= 0:
+
             running = False
 
         player_group.draw(screen)
