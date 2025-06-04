@@ -1,6 +1,6 @@
 # Vampire Survivor
 
-This repository contains a basic project setup for a simple Vampire Survivor style game written in Python using Pygame.
+This repository contains a basic project setup for a simple Vampire Survivor style game written in Python using Pygame.  It is a very small MVP where enemies spawn over time and the player automatically fires small bullets.
 
 ## Directory structure
 
@@ -23,3 +23,8 @@ Run the game:
 ```bash
 python src/main.py
 ```
+
+Use the arrow keys to move the player.  Enemies spawn from the edges of the
+screen and chase you while bullets are fired automatically.  Each defeated enemy
+adds to your score displayed in the corner.  Colliding with an enemy ends the
+game.

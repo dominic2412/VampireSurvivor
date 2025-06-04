@@ -19,5 +19,8 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_DOWN]:
             self.rect.y += 5
 
+        # Keep player on screen
+        self.rect.clamp_ip(pygame.Rect(0, 0, 800, 600))
+
     def draw(self, surface):
         surface.blit(self.image, self.rect)
