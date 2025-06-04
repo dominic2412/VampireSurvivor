@@ -3,7 +3,10 @@ import pygame
 from game.player import Player
 from game.enemy import Enemy
 from game.bullet import Bullet
-from game.utils import handle_bullet_enemy_collisions
+from game.utils import (
+    handle_bullet_enemy_collisions,
+    handle_player_enemy_collisions,
+)
 
 
 
@@ -20,6 +23,7 @@ def main():
 
     font = pygame.font.SysFont(None, 36)
     score = 0
+
     enemy_spawn_event = pygame.USEREVENT + 1
     bullet_spawn_event = pygame.USEREVENT + 2
     pygame.time.set_timer(enemy_spawn_event, 1000)
@@ -64,8 +68,8 @@ def main():
 
         score += handle_bullet_enemy_collisions(bullets, enemies)
 
+        if handle_player_enemy_collisions(player, enemies) and player.health <= 0:
 
-        if pygame.sprite.spritecollide(player, enemies, False):
             running = False
 
         player_group.draw(screen)
@@ -74,7 +78,9 @@ def main():
 
         score_surf = font.render(f"Score: {score}", True, (255, 255, 255))
         screen.blit(score_surf, (10, 10))
-        
+        health_surf = font.render(f"Health: {player.health}", True, (255, 255, 255))
+        screen.blit(health_surf, (10, 40))
+
         pygame.display.flip()
         clock.tick(60)
 

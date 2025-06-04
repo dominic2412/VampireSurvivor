@@ -7,7 +7,8 @@ pygame.init()
 
 from game.bullet import Bullet
 from game.enemy import Enemy
-from game.utils import handle_bullet_enemy_collisions
+from game.player import Player
+from game.utils import handle_bullet_enemy_collisions, handle_player_enemy_collisions
 
 
 
@@ -29,5 +30,13 @@ def test_collision_returns_score_increment():
     enemies = pygame.sprite.Group(Enemy((0, 0)))
     killed = handle_bullet_enemy_collisions(bullets, enemies)
     assert killed == 1
+
+
+def test_player_takes_damage_on_collision():
+    player = Player()
+    enemies = pygame.sprite.Group(Enemy(player.rect.center))
+    collided = handle_player_enemy_collisions(player, enemies)
+    assert collided
+    assert player.health == 2
 
 pygame.quit()
