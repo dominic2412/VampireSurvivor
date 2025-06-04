@@ -23,3 +23,9 @@ Run the game:
 ```bash
 python src/main.py
 ```
+
+## Gameplay
+
+Use the arrow keys to move the red square representing the player. Blue squares
+spawn every second and move slowly toward the player. Colliding with an enemy
+ends the game.
