@@ -11,6 +11,7 @@ from game.utils import (
 )
 
 
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode((800, 600))
@@ -22,6 +23,7 @@ def main():
     enemies = pygame.sprite.Group()
     bullets = pygame.sprite.Group()
     powerups = pygame.sprite.Group()
+
 
     font = pygame.font.SysFont(None, 36)
     score = 0
@@ -72,6 +74,7 @@ def main():
                 )
                 powerups.add(PowerUp(position))
 
+
         screen.fill((0, 0, 0))
         player_group.update()
         enemies.update(player.rect.center)
@@ -88,10 +91,12 @@ def main():
             running = False
         handle_player_powerup_collisions(player, powerups)
 
+
         player_group.draw(screen)
         enemies.draw(screen)
         bullets.draw(screen)
         powerups.draw(screen)
+
 
         score_surf = font.render(f"Score: {score}", True, (255, 255, 255))
         screen.blit(score_surf, (10, 10))

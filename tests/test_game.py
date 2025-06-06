@@ -16,6 +16,7 @@ from game.utils import (
 )
 
 
+
 def test_bullet_moves_up():
     b = Bullet((10, 10), speed=5)
     initial_y = b.rect.y
@@ -50,6 +51,7 @@ def test_player_collects_powerup():
     collided = handle_player_powerup_collisions(player, powerups)
     assert collided
     assert player.health == 2
+
 
 
 pygame.quit()

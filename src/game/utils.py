@@ -23,3 +23,4 @@ def handle_player_powerup_collisions(player, powerups):
         player.heal()
         return True
     return False
+
