@@ -8,7 +8,12 @@ pygame.init()
 from game.bullet import Bullet
 from game.enemy import Enemy
 from game.player import Player
-from game.utils import handle_bullet_enemy_collisions, handle_player_enemy_collisions
+from game.powerup import PowerUp
+from game.utils import (
+    handle_bullet_enemy_collisions,
+    handle_player_enemy_collisions,
+    handle_player_powerup_collisions,
+)
 
 
 
@@ -38,5 +43,15 @@ def test_player_takes_damage_on_collision():
     collided = handle_player_enemy_collisions(player, enemies)
     assert collided
     assert player.health == 2
+
+
+def test_player_collects_powerup():
+    player = Player(health=1)
+    powerups = pygame.sprite.Group(PowerUp(player.rect.center))
+    collided = handle_player_powerup_collisions(player, powerups)
+    assert collided
+    assert player.health == 2
+
+
 
 pygame.quit()
