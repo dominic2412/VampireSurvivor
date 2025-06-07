@@ -14,3 +14,12 @@ def handle_player_enemy_collisions(player, enemies):
         player.take_damage()
         return True
     return False
+
+
+def handle_player_powerup_collisions(player, powerups):
+    """Heal the player if they collect a power-up."""
+    collided = pygame.sprite.spritecollide(player, powerups, True)
+    if collided:
+        player.heal()
+        return True
+    return False

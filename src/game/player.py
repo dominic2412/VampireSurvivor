@@ -2,15 +2,19 @@ import pygame
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, health=3):
+    def __init__(self, health=3, max_health=5):
         super().__init__()
         self.image = pygame.Surface((50, 50))
         self.image.fill((255, 0, 0))
         self.rect = self.image.get_rect(center=(400, 300))
         self.health = health
+        self.max_health = max_health
 
     def take_damage(self, amount=1):
         self.health -= amount
+
+    def heal(self, amount=1):
+        self.health = min(self.health + amount, self.max_health)
 
     def update(self):
         keys = pygame.key.get_pressed()

@@ -27,8 +27,13 @@ python src/main.py
 
 Use the arrow keys to move the player.  Enemies spawn from the edges of the
 screen and chase you while bullets are fired automatically.  Each defeated enemy
-
 adds to your score displayed in the corner.  The player starts with three health
 points. Colliding with an enemy removes one health; the game ends when your
 health reaches zero.
+
+Yellow power-ups occasionally appear and restore one health when collected.
+Enemy spawn frequency increases slightly as you rack up kills, but the game is
+still very minimal.
+Press the `P` key to pause or resume. After your score reaches 10, faster blue
+enemies sometimes appear to keep things interesting.
 

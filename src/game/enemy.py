@@ -19,3 +19,14 @@ class Enemy(pygame.sprite.Sprite):
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)
+
+
+class FastEnemy(Enemy):
+    """A quicker enemy that is smaller and moves faster."""
+
+    def __init__(self, position, speed=4):
+        super().__init__(position, speed)
+        self.image = pygame.Surface((30, 30))
+        self.image.fill((0, 128, 255))
+        self.rect = self.image.get_rect(center=position)
+

@@ -6,9 +6,14 @@ import pygame
 pygame.init()
 
 from game.bullet import Bullet
-from game.enemy import Enemy
+from game.enemy import Enemy, FastEnemy
 from game.player import Player
-from game.utils import handle_bullet_enemy_collisions, handle_player_enemy_collisions
+from game.powerup import PowerUp
+from game.utils import (
+    handle_bullet_enemy_collisions,
+    handle_player_enemy_collisions,
+    handle_player_powerup_collisions,
+)
 
 
 
@@ -25,6 +30,15 @@ def test_enemy_moves_toward_target():
     assert e.rect.centerx > 0
 
 
+def test_fast_enemy_moves_faster():
+    e = FastEnemy((0, 0), speed=4)
+    e.update((8, 0))
+    assert e.rect.centerx > 0
+    # With double speed, it should move at least 3 pixels on first update
+    assert e.rect.centerx >= 3
+
+
+
 def test_collision_returns_score_increment():
     bullets = pygame.sprite.Group(Bullet((0, 0)))
     enemies = pygame.sprite.Group(Enemy((0, 0)))
@@ -38,5 +52,15 @@ def test_player_takes_damage_on_collision():
     collided = handle_player_enemy_collisions(player, enemies)
     assert collided
     assert player.health == 2
+
+
+def test_player_collects_powerup():
+    player = Player(health=1)
+    powerups = pygame.sprite.Group(PowerUp(player.rect.center))
+    collided = handle_player_powerup_collisions(player, powerups)
+    assert collided
+    assert player.health == 2
+
+
 
 pygame.quit()
