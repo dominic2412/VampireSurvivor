@@ -16,6 +16,7 @@ from game.utils import (
 )
 
 
+
 def test_bullet_moves_up():
     b = Bullet((10, 10), speed=5)
     initial_y = b.rect.y
@@ -35,6 +36,7 @@ def test_fast_enemy_moves_faster():
     assert e.rect.centerx > 0
     # With double speed, it should move at least 3 pixels on first update
     assert e.rect.centerx >= 3
+
 
 
 def test_collision_returns_score_increment():
@@ -58,6 +60,7 @@ def test_player_collects_powerup():
     collided = handle_player_powerup_collisions(player, powerups)
     assert collided
     assert player.health == 2
+
 
 
 pygame.quit()

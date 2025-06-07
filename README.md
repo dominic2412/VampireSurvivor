@@ -36,3 +36,4 @@ Enemy spawn frequency increases slightly as you rack up kills, but the game is
 still very minimal.
 Press the `P` key to pause or resume. After your score reaches 10, faster blue
 enemies sometimes appear to keep things interesting.
+
