@@ -1,8 +1,7 @@
 import random
 import pygame
 from game.player import Player
-from game.enemy import Enemy, FastEnemy, StrongEnemy
-
+from game.enemy import Enemy, FastEnemy
 from game.bullet import Bullet
 from game.powerup import PowerUp
 from game.utils import (
@@ -48,6 +47,7 @@ def main():
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_p:
                 paused = not paused
             elif not paused and event.type == enemy_spawn_event:
+
                 edge = random.choice(["top", "bottom", "left", "right"])
                 if edge == "top":
                     position = (
@@ -69,9 +69,7 @@ def main():
                         screen.get_width() + 20,
                         random.randint(0, screen.get_height()),
                     )
-                    if score >= 20 and random.random() < 0.2:
-                    enemies.add(StrongEnemy(position))
-                elif score >= 10 and random.random() < 0.3:
+                if score >= 10 and random.random() < 0.3:
                     enemies.add(FastEnemy(position))
                 else:
                     enemies.add(Enemy(position))

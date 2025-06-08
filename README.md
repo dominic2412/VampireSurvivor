@@ -35,5 +35,5 @@ Yellow power-ups occasionally appear and restore one health when collected.
 Enemy spawn frequency increases slightly as you rack up kills, but the game is
 still very minimal.
 Press the `P` key to pause or resume. After your score reaches 10, faster blue
-enemies sometimes appear to keep things interesting. Once you hit a score of 20,
-larger dark-red enemies spawn that take several hits before they go down.
+enemies sometimes appear to keep things interesting.
+
