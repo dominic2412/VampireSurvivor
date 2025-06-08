@@ -2,6 +2,7 @@ import random
 import pygame
 from game.player import Player
 from game.enemy import Enemy, FastEnemy, StrongEnemy
+
 from game.bullet import Bullet
 from game.powerup import PowerUp
 from game.utils import (
@@ -9,6 +10,7 @@ from game.utils import (
     handle_player_enemy_collisions,
     handle_player_powerup_collisions,
 )
+
 
 
 def main():
@@ -23,6 +25,7 @@ def main():
     bullets = pygame.sprite.Group()
     powerups = pygame.sprite.Group()
 
+
     font = pygame.font.SysFont(None, 36)
     score = 0
 
@@ -35,6 +38,7 @@ def main():
 
     enemy_spawn_delay = 1000
     paused = False
+
 
     running = True
     while running:
@@ -65,7 +69,7 @@ def main():
                         screen.get_width() + 20,
                         random.randint(0, screen.get_height()),
                     )
-                if score >= 20 and random.random() < 0.2:
+                    if score >= 20 and random.random() < 0.2:
                     enemies.add(StrongEnemy(position))
                 elif score >= 10 and random.random() < 0.3:
                     enemies.add(FastEnemy(position))
@@ -98,10 +102,12 @@ def main():
                 running = False
             handle_player_powerup_collisions(player, powerups)
 
+
         player_group.draw(screen)
         enemies.draw(screen)
         bullets.draw(screen)
         powerups.draw(screen)
+
 
         score_surf = font.render(f"Score: {score}", True, (255, 255, 255))
         screen.blit(score_surf, (10, 10))
@@ -112,6 +118,7 @@ def main():
             pause_surf = font.render("Paused", True, (255, 255, 255))
             rect = pause_surf.get_rect(center=screen.get_rect().center)
             screen.blit(pause_surf, rect)
+
 
         pygame.display.flip()
         clock.tick(60)

@@ -74,4 +74,5 @@ def test_strong_enemy_requires_multiple_hits():
     assert not enemy.alive()
 
 
+
 pygame.quit()
