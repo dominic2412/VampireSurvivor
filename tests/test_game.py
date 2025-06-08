@@ -6,7 +6,7 @@ import pygame
 pygame.init()
 
 from game.bullet import Bullet
-from game.enemy import Enemy, FastEnemy
+from game.enemy import Enemy, FastEnemy, StrongEnemy
 from game.player import Player
 from game.powerup import PowerUp
 from game.utils import (
@@ -14,7 +14,6 @@ from game.utils import (
     handle_player_enemy_collisions,
     handle_player_powerup_collisions,
 )
-
 
 
 def test_bullet_moves_up():
@@ -38,7 +37,6 @@ def test_fast_enemy_moves_faster():
     assert e.rect.centerx >= 3
 
 
-
 def test_collision_returns_score_increment():
     bullets = pygame.sprite.Group(Bullet((0, 0)))
     enemies = pygame.sprite.Group(Enemy((0, 0)))
@@ -60,6 +58,20 @@ def test_player_collects_powerup():
     collided = handle_player_powerup_collisions(player, powerups)
     assert collided
     assert player.health == 2
+
+
+def test_strong_enemy_requires_multiple_hits():
+    enemy = StrongEnemy((0, 0), health=2)
+    enemies = pygame.sprite.Group(enemy)
+    bullets = pygame.sprite.Group(Bullet((0, 0)))
+    killed = handle_bullet_enemy_collisions(bullets, enemies)
+    assert killed == 0
+    assert enemy.alive()
+
+    bullets = pygame.sprite.Group(Bullet((0, 0)))
+    killed = handle_bullet_enemy_collisions(bullets, enemies)
+    assert killed == 1
+    assert not enemy.alive()
 
 
 
