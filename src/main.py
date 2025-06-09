@@ -2,7 +2,6 @@ import random
 import pygame
 from game.player import Player
 from game.enemy import Enemy, FastEnemy, StrongEnemy
-
 from game.bullet import Bullet
 from game.powerup import PowerUp
 from game.utils import (
@@ -10,7 +9,6 @@ from game.utils import (
     handle_player_enemy_collisions,
     handle_player_powerup_collisions,
 )
-
 
 
 def main():
@@ -25,7 +23,6 @@ def main():
     bullets = pygame.sprite.Group()
     powerups = pygame.sprite.Group()
 
-
     font = pygame.font.SysFont(None, 36)
     score = 0
 
@@ -37,6 +34,7 @@ def main():
     pygame.time.set_timer(powerup_spawn_event, 5000)
 
     enemy_spawn_delay = 1000
+    bullet_spawn_delay = 500
     paused = False
 
 
@@ -69,7 +67,9 @@ def main():
                         screen.get_width() + 20,
                         random.randint(0, screen.get_height()),
                     )
-                    if score >= 20 and random.random() < 0.2:
+                if score >= 40 and random.random() < 0.1:
+                    enemies.add(BossEnemy(position))
+                elif score >= 20 and random.random() < 0.2:
                     enemies.add(StrongEnemy(position))
                 elif score >= 10 and random.random() < 0.3:
                     enemies.add(FastEnemy(position))
@@ -97,17 +97,18 @@ def main():
             if kills > 0 and score % 5 == 0:
                 enemy_spawn_delay = max(200, enemy_spawn_delay - 100)
                 pygame.time.set_timer(enemy_spawn_event, enemy_spawn_delay)
+                if score >= 30:
+                    bullet_spawn_delay = max(200, bullet_spawn_delay - 50)
+                    pygame.time.set_timer(bullet_spawn_event, bullet_spawn_delay)
 
             if handle_player_enemy_collisions(player, enemies) and player.health <= 0:
                 running = False
             handle_player_powerup_collisions(player, powerups)
 
-
         player_group.draw(screen)
         enemies.draw(screen)
         bullets.draw(screen)
         powerups.draw(screen)
-
 
         score_surf = font.render(f"Score: {score}", True, (255, 255, 255))
         screen.blit(score_surf, (10, 10))
@@ -118,7 +119,6 @@ def main():
             pause_surf = font.render("Paused", True, (255, 255, 255))
             rect = pause_surf.get_rect(center=screen.get_rect().center)
             screen.blit(pause_surf, rect)
-
 
         pygame.display.flip()
         clock.tick(60)

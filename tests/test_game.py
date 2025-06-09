@@ -6,7 +6,7 @@ import pygame
 pygame.init()
 
 from game.bullet import Bullet
-from game.enemy import Enemy, FastEnemy, StrongEnemy
+from game.enemy import Enemy, FastEnemy, StrongEnemy, BossEnemy
 from game.player import Player
 from game.powerup import PowerUp
 from game.utils import (
@@ -73,6 +73,21 @@ def test_strong_enemy_requires_multiple_hits():
     assert killed == 1
     assert not enemy.alive()
 
+
+def test_boss_enemy_requires_five_hits():
+    enemy = BossEnemy((0, 0), health=5)
+    enemies = pygame.sprite.Group(enemy)
+    for _ in range(4):
+        killed = handle_bullet_enemy_collisions(
+            pygame.sprite.Group(Bullet((0, 0))), enemies
+        )
+        assert killed == 0
+        assert enemy.alive()
+    killed = handle_bullet_enemy_collisions(
+        pygame.sprite.Group(Bullet((0, 0))), enemies
+    )
+    assert killed == 1
+    assert not enemy.alive()
 
 
 pygame.quit()

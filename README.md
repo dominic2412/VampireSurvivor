@@ -36,4 +36,8 @@ Enemy spawn frequency increases slightly as you rack up kills, but the game is
 still very minimal.
 Press the `P` key to pause or resume. After your score reaches 10, faster blue
 enemies sometimes appear to keep things interesting. Once you hit a score of 20,
-larger dark-red enemies spawn that take several hits before they go down.
+larger dark-red enemies spawn that take several hits before they go down. When
+your score climbs above 30, bullets fire a little faster, and after score 40,
+a huge purple boss enemy occasionally appears and requires even more hits to
+defeat.
+

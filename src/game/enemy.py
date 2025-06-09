@@ -40,4 +40,15 @@ class StrongEnemy(Enemy):
         self.image.fill((128, 0, 0))
         self.rect = self.image.get_rect(center=position)
         self.health = health
+        
+
+class BossEnemy(Enemy):
+    """A tough enemy that takes many hits to defeat."""
+
+    def __init__(self, position, speed=1, health=5):
+        super().__init__(position, speed)
+        self.image = pygame.Surface((60, 60))
+        self.image.fill((128, 0, 128))
+        self.rect = self.image.get_rect(center=position)
+        self.health = health
 
