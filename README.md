@@ -40,3 +40,4 @@ larger dark-red enemies spawn that take several hits before they go down. When
 your score climbs above 30, bullets fire a little faster, and after score 40,
 a huge purple boss enemy occasionally appears and requires even more hits to
 defeat.
+

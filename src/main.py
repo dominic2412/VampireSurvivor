@@ -37,6 +37,7 @@ def main():
     bullet_spawn_delay = 500
     paused = False
 
+
     running = True
     while running:
         for event in pygame.event.get():
