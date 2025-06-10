@@ -21,6 +21,7 @@ class Player(pygame.sprite.Sprite):
     def add_shield(self, duration=180):
         self.shield_timer = duration
 
+
     def update(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:

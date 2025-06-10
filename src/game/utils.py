@@ -39,3 +39,4 @@ def handle_player_powerup_collisions(player, powerups):
             player.add_shield(powerup.shield_duration)
             collected = True
     return collected
+

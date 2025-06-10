@@ -19,3 +19,4 @@ class ShieldPowerUp(PowerUp):
         super().__init__(position, heal_amount=0)
         self.image.fill((0, 255, 255))
         self.shield_duration = duration
+

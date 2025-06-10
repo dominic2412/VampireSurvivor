@@ -71,6 +71,7 @@ def test_shield_powerup_blocks_damage():
     assert player.health == 3
 
 
+
 def test_strong_enemy_requires_multiple_hits():
     enemy = StrongEnemy((0, 0), health=2)
     enemies = pygame.sprite.Group(enemy)

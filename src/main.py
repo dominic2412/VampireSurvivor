@@ -37,6 +37,7 @@ def main():
     bullet_spawn_delay = 500
     paused = False
 
+
     running = True
     while running:
         for event in pygame.event.get():
@@ -86,6 +87,7 @@ def main():
                 else:
                     powerups.add(ShieldPowerUp(position))
 
+
         screen.fill((0, 0, 0))
         if not paused:
             player_group.update()
@@ -121,6 +123,7 @@ def main():
                 f"Shield: {player.shield_timer // 60}", True, (0, 255, 255)
             )
             screen.blit(shield_surf, (10, 70))
+
 
         if paused:
             pause_surf = font.render("Paused", True, (255, 255, 255))
