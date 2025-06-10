@@ -32,6 +32,8 @@ points. Colliding with an enemy removes one health; the game ends when your
 health reaches zero.
 
 Yellow power-ups occasionally appear and restore one health when collected.
+Blue power-ups grant a temporary shield that prevents damage for a few seconds.
+
 Enemy spawn frequency increases slightly as you rack up kills, but the game is
 still very minimal.
 Press the `P` key to pause or resume. After your score reaches 10, faster blue
@@ -40,4 +42,5 @@ larger dark-red enemies spawn that take several hits before they go down. When
 your score climbs above 30, bullets fire a little faster, and after score 40,
 a huge purple boss enemy occasionally appears and requires even more hits to
 defeat.
-
+While a shield is active, the remaining time in seconds is displayed below your
+health counter.

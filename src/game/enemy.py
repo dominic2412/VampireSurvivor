@@ -40,7 +40,7 @@ class StrongEnemy(Enemy):
         self.image.fill((128, 0, 0))
         self.rect = self.image.get_rect(center=position)
         self.health = health
-        
+
 
 class BossEnemy(Enemy):
     """A tough enemy that takes many hits to defeat."""

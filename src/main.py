@@ -1,9 +1,9 @@
 import random
 import pygame
 from game.player import Player
-from game.enemy import Enemy, FastEnemy, StrongEnemy
+from game.enemy import Enemy, FastEnemy, StrongEnemy, BossEnemy
 from game.bullet import Bullet
-from game.powerup import PowerUp
+from game.powerup import PowerUp, ShieldPowerUp
 from game.utils import (
     handle_bullet_enemy_collisions,
     handle_player_enemy_collisions,
@@ -82,7 +82,11 @@ def main():
                     random.randint(20, screen.get_width() - 20),
                     random.randint(20, screen.get_height() - 20),
                 )
-                powerups.add(PowerUp(position))
+                if random.random() < 0.5:
+                    powerups.add(PowerUp(position))
+                else:
+                    powerups.add(ShieldPowerUp(position))
+
 
         screen.fill((0, 0, 0))
         if not paused:
@@ -114,6 +118,12 @@ def main():
         screen.blit(score_surf, (10, 10))
         health_surf = font.render(f"Health: {player.health}", True, (255, 255, 255))
         screen.blit(health_surf, (10, 40))
+        if player.shield_timer > 0:
+            shield_surf = font.render(
+                f"Shield: {player.shield_timer // 60}", True, (0, 255, 255)
+            )
+            screen.blit(shield_surf, (10, 70))
+
 
         if paused:
             pause_surf = font.render("Paused", True, (255, 255, 255))

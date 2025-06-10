@@ -28,9 +28,15 @@ def handle_player_enemy_collisions(player, enemies):
 
 
 def handle_player_powerup_collisions(player, powerups):
-    """Heal the player if they collect a power-up."""
+    """Apply effects from collected power-ups."""
     collided = pygame.sprite.spritecollide(player, powerups, True)
-    if collided:
-        player.heal()
-        return True
-    return False
+    collected = False
+    for powerup in collided:
+        if hasattr(powerup, "heal_amount") and powerup.heal_amount:
+            player.heal(powerup.heal_amount)
+            collected = True
+        if hasattr(powerup, "shield_duration"):
+            player.add_shield(powerup.shield_duration)
+            collected = True
+    return collected
+

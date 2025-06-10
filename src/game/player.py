@@ -9,12 +9,18 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=(400, 300))
         self.health = health
         self.max_health = max_health
+        self.shield_timer = 0
 
     def take_damage(self, amount=1):
-        self.health -= amount
+        if self.shield_timer <= 0:
+            self.health -= amount
 
     def heal(self, amount=1):
         self.health = min(self.health + amount, self.max_health)
+
+    def add_shield(self, duration=180):
+        self.shield_timer = duration
+
 
     def update(self):
         keys = pygame.key.get_pressed()
@@ -29,6 +35,9 @@ class Player(pygame.sprite.Sprite):
 
         # Keep player on screen
         self.rect.clamp_ip(pygame.Rect(0, 0, 800, 600))
+
+        if self.shield_timer > 0:
+            self.shield_timer -= 1
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)
