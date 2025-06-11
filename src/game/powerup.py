@@ -20,3 +20,12 @@ class ShieldPowerUp(PowerUp):
         self.image.fill((0, 255, 255))
         self.shield_duration = duration
 
+
+class SpeedPowerUp(PowerUp):
+    """Power-up giving the player a short speed boost."""
+
+    def __init__(self, position, duration=180):
+        super().__init__(position, heal_amount=0)
+        self.image.fill((255, 165, 0))
+        self.speed_duration = duration
+

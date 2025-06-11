@@ -8,7 +8,8 @@ pygame.init()
 from game.bullet import Bullet
 from game.enemy import Enemy, FastEnemy, StrongEnemy, BossEnemy
 from game.player import Player
-from game.powerup import PowerUp, ShieldPowerUp
+from game.powerup import PowerUp, ShieldPowerUp, SpeedPowerUp
+
 from game.utils import (
     handle_bullet_enemy_collisions,
     handle_player_enemy_collisions,
@@ -69,6 +70,13 @@ def test_shield_powerup_blocks_damage():
     enemies = pygame.sprite.Group(Enemy(player.rect.center))
     handle_player_enemy_collisions(player, enemies)
     assert player.health == 3
+
+
+def test_speed_powerup_makes_player_faster():
+    player = Player()
+    powerups = pygame.sprite.Group(SpeedPowerUp(player.rect.center, duration=2))
+    handle_player_powerup_collisions(player, powerups)
+    assert player.speed_timer == 2
 
 
 

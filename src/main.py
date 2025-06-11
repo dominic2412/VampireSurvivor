@@ -3,7 +3,8 @@ import pygame
 from game.player import Player
 from game.enemy import Enemy, FastEnemy, StrongEnemy, BossEnemy
 from game.bullet import Bullet
-from game.powerup import PowerUp, ShieldPowerUp
+from game.powerup import PowerUp, ShieldPowerUp, SpeedPowerUp
+
 from game.utils import (
     handle_bullet_enemy_collisions,
     handle_player_enemy_collisions,
@@ -82,10 +83,13 @@ def main():
                     random.randint(20, screen.get_width() - 20),
                     random.randint(20, screen.get_height() - 20),
                 )
-                if random.random() < 0.5:
+                roll = random.random()
+                if roll < 0.34:
                     powerups.add(PowerUp(position))
-                else:
+                elif roll < 0.67:
                     powerups.add(ShieldPowerUp(position))
+                else:
+                    powerups.add(SpeedPowerUp(position))
 
 
         screen.fill((0, 0, 0))
@@ -123,6 +127,11 @@ def main():
                 f"Shield: {player.shield_timer // 60}", True, (0, 255, 255)
             )
             screen.blit(shield_surf, (10, 70))
+        if player.speed_timer > 0:
+            speed_surf = font.render(
+                f"Speed: {player.speed_timer // 60}", True, (255, 165, 0)
+            )
+            screen.blit(speed_surf, (10, 100))
 
 
         if paused:

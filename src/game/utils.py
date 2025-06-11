@@ -38,5 +38,8 @@ def handle_player_powerup_collisions(player, powerups):
         if hasattr(powerup, "shield_duration"):
             player.add_shield(powerup.shield_duration)
             collected = True
+        if hasattr(powerup, "speed_duration"):
+            player.add_speed(powerup.speed_duration)
+            collected = True
     return collected
 
