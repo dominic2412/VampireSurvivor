@@ -28,3 +28,4 @@ class SpeedPowerUp(PowerUp):
         super().__init__(position, heal_amount=0)
         self.image.fill((255, 165, 0))
         self.speed_duration = duration
+

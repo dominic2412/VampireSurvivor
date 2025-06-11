@@ -34,6 +34,7 @@ health reaches zero.
 Yellow power-ups occasionally appear and restore one health when collected.
 Blue power-ups grant a temporary shield that prevents damage for a few seconds.
 Orange power-ups briefly boost your movement speed, shown with a timer when active.
+
 Enemy spawn frequency increases slightly as you rack up kills, but the game is
 still very minimal.
 Press the `P` key to pause or resume. After your score reaches 10, faster blue

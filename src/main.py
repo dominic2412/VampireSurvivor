@@ -4,6 +4,7 @@ from game.player import Player
 from game.enemy import Enemy, FastEnemy, StrongEnemy, BossEnemy
 from game.bullet import Bullet
 from game.powerup import PowerUp, ShieldPowerUp, SpeedPowerUp
+
 from game.utils import (
     handle_bullet_enemy_collisions,
     handle_player_enemy_collisions,
@@ -36,6 +37,7 @@ def main():
     enemy_spawn_delay = 1000
     bullet_spawn_delay = 500
     paused = False
+
 
     running = True
     while running:
@@ -89,6 +91,7 @@ def main():
                 else:
                     powerups.add(SpeedPowerUp(position))
 
+
         screen.fill((0, 0, 0))
         if not paused:
             player_group.update()
@@ -129,6 +132,7 @@ def main():
                 f"Speed: {player.speed_timer // 60}", True, (255, 165, 0)
             )
             screen.blit(speed_surf, (10, 100))
+
 
         if paused:
             pause_surf = font.render("Paused", True, (255, 255, 255))

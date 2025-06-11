@@ -42,3 +42,4 @@ def handle_player_powerup_collisions(player, powerups):
             player.add_speed(powerup.speed_duration)
             collected = True
     return collected
+
