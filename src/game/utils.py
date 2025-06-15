@@ -41,5 +41,11 @@ def handle_player_powerup_collisions(player, powerups):
         if hasattr(powerup, "speed_duration"):
             player.add_speed(powerup.speed_duration)
             collected = True
+        if hasattr(powerup, "triple_duration"):
+            player.add_triple_shot(powerup.triple_duration)
+            collected = True
+        if hasattr(powerup, "freeze_duration"):
+            player.add_freeze(powerup.freeze_duration)
+            collected = True
     return collected
 
