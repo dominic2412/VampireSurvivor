@@ -9,11 +9,11 @@ class Enemy(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=position)
         self.speed = speed
 
-    def update(self, target_pos):
+    def update(self, target_pos, speed_factor=1):
         """Move toward the given target position."""
         direction = pygame.math.Vector2(target_pos) - self.rect.center
         if direction.length() != 0:
-            direction = direction.normalize() * self.speed
+            direction = direction.normalize() * self.speed * speed_factor
             self.rect.centerx += int(direction.x)
             self.rect.centery += int(direction.y)
 

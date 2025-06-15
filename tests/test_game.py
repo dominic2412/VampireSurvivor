@@ -8,7 +8,8 @@ pygame.init()
 from game.bullet import Bullet
 from game.enemy import Enemy, FastEnemy, StrongEnemy, BossEnemy
 from game.player import Player
-from game.powerup import PowerUp, ShieldPowerUp, SpeedPowerUp
+from game.powerup import PowerUp, ShieldPowerUp, SpeedPowerUp, TripleShotPowerUp
+from game.powerup import FreezePowerUp
 
 from game.utils import (
     handle_bullet_enemy_collisions,
@@ -36,6 +37,13 @@ def test_fast_enemy_moves_faster():
     assert e.rect.centerx > 0
     # With double speed, it should move at least 3 pixels on first update
     assert e.rect.centerx >= 3
+
+
+def test_enemy_slowed_by_freeze_factor():
+    e = Enemy((0, 0), speed=4)
+    e.update((8, 0), speed_factor=0.5)
+    # Speed halved so movement should be less than default speed
+    assert 0 < e.rect.centerx < 4
 
 
 def test_collision_returns_score_increment():
@@ -77,6 +85,20 @@ def test_speed_powerup_makes_player_faster():
     powerups = pygame.sprite.Group(SpeedPowerUp(player.rect.center, duration=2))
     handle_player_powerup_collisions(player, powerups)
     assert player.speed_timer == 2
+
+
+def test_triple_shot_powerup_sets_timer():
+    player = Player()
+    powerups = pygame.sprite.Group(TripleShotPowerUp(player.rect.center, duration=5))
+    handle_player_powerup_collisions(player, powerups)
+    assert player.triple_shot_timer == 5
+
+
+def test_freeze_powerup_sets_timer():
+    player = Player()
+    powerups = pygame.sprite.Group(FreezePowerUp(player.rect.center, duration=7))
+    handle_player_powerup_collisions(player, powerups)
+    assert player.freeze_timer == 7
 
 
 

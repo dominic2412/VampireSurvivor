@@ -11,6 +11,8 @@ class Player(pygame.sprite.Sprite):
         self.max_health = max_health
         self.shield_timer = 0
         self.speed_timer = 0
+        self.triple_shot_timer = 0
+        self.freeze_timer = 0
         self.base_speed = base_speed
 
     def take_damage(self, amount=1):
@@ -25,6 +27,12 @@ class Player(pygame.sprite.Sprite):
 
     def add_speed(self, duration=180):
         self.speed_timer = duration
+
+    def add_triple_shot(self, duration=180):
+        self.triple_shot_timer = duration
+
+    def add_freeze(self, duration=180):
+        self.freeze_timer = duration
 
 
     def update(self):
@@ -46,12 +54,10 @@ class Player(pygame.sprite.Sprite):
             self.shield_timer -= 1
         if self.speed_timer > 0:
             self.speed_timer -= 1
-
-        # Keep player on screen
-        self.rect.clamp_ip(pygame.Rect(0, 0, 800, 600))
-
-        if self.shield_timer > 0:
-            self.shield_timer -= 1
+        if self.triple_shot_timer > 0:
+            self.triple_shot_timer -= 1
+        if self.freeze_timer > 0:
+            self.freeze_timer -= 1
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)
