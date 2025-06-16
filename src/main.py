@@ -9,6 +9,7 @@ from game.powerup import (
     SpeedPowerUp,
     TripleShotPowerUp,
     FreezePowerUp,
+
     PiercePowerUp,
 )
 
@@ -91,6 +92,7 @@ def main():
                         bullets.add(Bullet((player.rect.centerx + dx, player.rect.centery), **bullet_kwargs))
                 else:
                     bullets.add(Bullet(player.rect.center, **bullet_kwargs))
+
             elif not paused and event.type == powerup_spawn_event:
                 position = (
                     random.randint(20, screen.get_width() - 20),
@@ -162,6 +164,7 @@ def main():
                 f"Pierce: {player.pierce_timer // 60}", True, (138, 43, 226)
             )
             screen.blit(pierce_surf, (10, 160))
+
 
 
         if paused:

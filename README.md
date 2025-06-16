@@ -38,6 +38,7 @@ Pink power-ups activate a triple-shot mode letting you fire three bullets at onc
 Light-blue power-ups slow all enemies for a few seconds, displayed with its own timer.
 Purple power-ups let your bullets pierce through enemies for a few seconds.
 
+
 Enemy spawn frequency increases slightly as you rack up kills, but the game is
 still very minimal.
 Press the `P` key to pause or resume. After your score reaches 10, faster blue

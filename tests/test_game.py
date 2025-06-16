@@ -17,6 +17,7 @@ from game.powerup import (
     PiercePowerUp,
 )
 
+
 from game.utils import (
     handle_bullet_enemy_collisions,
     handle_player_enemy_collisions,
@@ -120,6 +121,7 @@ def test_piercing_bullet_survives_collision():
     killed = handle_bullet_enemy_collisions(bullets, enemies)
     assert killed == 1
     assert len(bullets) == 1
+
 
 
 

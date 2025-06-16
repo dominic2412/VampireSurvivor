@@ -39,6 +39,7 @@ class Player(pygame.sprite.Sprite):
         self.pierce_timer = duration
 
 
+
     def update(self):
         keys = pygame.key.get_pressed()
         move_speed = self.base_speed + 3 if self.speed_timer > 0 else self.base_speed
@@ -64,6 +65,7 @@ class Player(pygame.sprite.Sprite):
             self.freeze_timer -= 1
         if self.pierce_timer > 0:
             self.pierce_timer -= 1
+
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)
