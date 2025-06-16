@@ -3,7 +3,14 @@ import pygame
 from game.player import Player
 from game.enemy import Enemy, FastEnemy, StrongEnemy, BossEnemy
 from game.bullet import Bullet
-from game.powerup import PowerUp, ShieldPowerUp, SpeedPowerUp
+from game.powerup import (
+    PowerUp,
+    ShieldPowerUp,
+    SpeedPowerUp,
+    TripleShotPowerUp,
+    FreezePowerUp,
+    PiercePowerUp,
+)
 
 from game.utils import (
     handle_bullet_enemy_collisions,
@@ -77,25 +84,38 @@ def main():
                 else:
                     enemies.add(Enemy(position))
             elif not paused and event.type == bullet_spawn_event:
-                bullets.add(Bullet(player.rect.center))
+                bullet_kwargs = {"piercing": player.pierce_timer > 0}
+                if player.triple_shot_timer > 0:
+                    offsets = [-15, 0, 15]
+                    for dx in offsets:
+                        bullets.add(Bullet((player.rect.centerx + dx, player.rect.centery), **bullet_kwargs))
+                else:
+                    bullets.add(Bullet(player.rect.center, **bullet_kwargs))
             elif not paused and event.type == powerup_spawn_event:
                 position = (
                     random.randint(20, screen.get_width() - 20),
                     random.randint(20, screen.get_height() - 20),
                 )
                 roll = random.random()
-                if roll < 0.34:
+                if roll < 0.2:
                     powerups.add(PowerUp(position))
-                elif roll < 0.67:
+                elif roll < 0.4:
                     powerups.add(ShieldPowerUp(position))
-                else:
+                elif roll < 0.6:
                     powerups.add(SpeedPowerUp(position))
+                elif roll < 0.8:
+                    powerups.add(TripleShotPowerUp(position))
+                elif roll < 0.9:
+                    powerups.add(FreezePowerUp(position))
+                else:
+                    powerups.add(PiercePowerUp(position))
 
 
         screen.fill((0, 0, 0))
         if not paused:
+            freeze_factor = 0.5 if player.freeze_timer > 0 else 1
             player_group.update()
-            enemies.update(player.rect.center)
+            enemies.update(player.rect.center, freeze_factor)
             bullets.update()
             powerups.update()
 
@@ -132,6 +152,16 @@ def main():
                 f"Speed: {player.speed_timer // 60}", True, (255, 165, 0)
             )
             screen.blit(speed_surf, (10, 100))
+        if player.freeze_timer > 0:
+            freeze_surf = font.render(
+                f"Freeze: {player.freeze_timer // 60}", True, (173, 216, 230)
+            )
+            screen.blit(freeze_surf, (10, 130))
+        if player.pierce_timer > 0:
+            pierce_surf = font.render(
+                f"Pierce: {player.pierce_timer // 60}", True, (138, 43, 226)
+            )
+            screen.blit(pierce_surf, (10, 160))
 
 
         if paused:

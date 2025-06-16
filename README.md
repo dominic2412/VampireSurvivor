@@ -34,6 +34,9 @@ health reaches zero.
 Yellow power-ups occasionally appear and restore one health when collected.
 Blue power-ups grant a temporary shield that prevents damage for a few seconds.
 Orange power-ups briefly boost your movement speed, shown with a timer when active.
+Pink power-ups activate a triple-shot mode letting you fire three bullets at once for a short time.
+Light-blue power-ups slow all enemies for a few seconds, displayed with its own timer.
+Purple power-ups let your bullets pierce through enemies for a few seconds.
 
 Enemy spawn frequency increases slightly as you rack up kills, but the game is
 still very minimal.
