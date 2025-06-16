@@ -8,8 +8,15 @@ pygame.init()
 from game.bullet import Bullet
 from game.enemy import Enemy, FastEnemy, StrongEnemy, BossEnemy
 from game.player import Player
-from game.powerup import PowerUp, ShieldPowerUp, SpeedPowerUp, TripleShotPowerUp
-from game.powerup import FreezePowerUp
+from game.powerup import (
+    PowerUp,
+    ShieldPowerUp,
+    SpeedPowerUp,
+    TripleShotPowerUp,
+    FreezePowerUp,
+    PiercePowerUp,
+)
+
 
 from game.utils import (
     handle_bullet_enemy_collisions,
@@ -99,6 +106,22 @@ def test_freeze_powerup_sets_timer():
     powerups = pygame.sprite.Group(FreezePowerUp(player.rect.center, duration=7))
     handle_player_powerup_collisions(player, powerups)
     assert player.freeze_timer == 7
+
+
+def test_pierce_powerup_sets_timer():
+    player = Player()
+    powerups = pygame.sprite.Group(PiercePowerUp(player.rect.center, duration=4))
+    handle_player_powerup_collisions(player, powerups)
+    assert player.pierce_timer == 4
+
+
+def test_piercing_bullet_survives_collision():
+    bullets = pygame.sprite.Group(Bullet((0, 0), piercing=True))
+    enemies = pygame.sprite.Group(Enemy((0, 0)))
+    killed = handle_bullet_enemy_collisions(bullets, enemies)
+    assert killed == 1
+    assert len(bullets) == 1
+
 
 
 

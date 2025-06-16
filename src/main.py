@@ -9,6 +9,8 @@ from game.powerup import (
     SpeedPowerUp,
     TripleShotPowerUp,
     FreezePowerUp,
+
+    PiercePowerUp,
 )
 
 from game.utils import (
@@ -83,12 +85,14 @@ def main():
                 else:
                     enemies.add(Enemy(position))
             elif not paused and event.type == bullet_spawn_event:
+                bullet_kwargs = {"piercing": player.pierce_timer > 0}
                 if player.triple_shot_timer > 0:
                     offsets = [-15, 0, 15]
                     for dx in offsets:
-                        bullets.add(Bullet((player.rect.centerx + dx, player.rect.centery)))
+                        bullets.add(Bullet((player.rect.centerx + dx, player.rect.centery), **bullet_kwargs))
                 else:
-                    bullets.add(Bullet(player.rect.center))
+                    bullets.add(Bullet(player.rect.center, **bullet_kwargs))
+
             elif not paused and event.type == powerup_spawn_event:
                 position = (
                     random.randint(20, screen.get_width() - 20),
@@ -103,8 +107,10 @@ def main():
                     powerups.add(SpeedPowerUp(position))
                 elif roll < 0.8:
                     powerups.add(TripleShotPowerUp(position))
-                else:
+                elif roll < 0.9:
                     powerups.add(FreezePowerUp(position))
+                else:
+                    powerups.add(PiercePowerUp(position))
 
 
         screen.fill((0, 0, 0))
@@ -153,6 +159,12 @@ def main():
                 f"Freeze: {player.freeze_timer // 60}", True, (173, 216, 230)
             )
             screen.blit(freeze_surf, (10, 130))
+        if player.pierce_timer > 0:
+            pierce_surf = font.render(
+                f"Pierce: {player.pierce_timer // 60}", True, (138, 43, 226)
+            )
+            screen.blit(pierce_surf, (10, 160))
+
 
 
         if paused:

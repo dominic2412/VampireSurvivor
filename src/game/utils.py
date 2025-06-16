@@ -3,9 +3,9 @@ import pygame
 
 def handle_bullet_enemy_collisions(bullets, enemies):
     """Handle bullet/enemy collisions and return number of enemies removed."""
-    collisions = pygame.sprite.groupcollide(bullets, enemies, True, False)
+    collisions = pygame.sprite.groupcollide(bullets, enemies, False, False)
     killed = 0
-    for enemy_list in collisions.values():
+    for bullet, enemy_list in collisions.items():
         for enemy in enemy_list:
             if hasattr(enemy, "health"):
                 enemy.health -= 1
@@ -15,6 +15,8 @@ def handle_bullet_enemy_collisions(bullets, enemies):
             else:
                 enemy.kill()
                 killed += 1
+        if not getattr(bullet, "piercing", False):
+            bullet.kill()
     return killed
 
 
@@ -47,5 +49,10 @@ def handle_player_powerup_collisions(player, powerups):
         if hasattr(powerup, "freeze_duration"):
             player.add_freeze(powerup.freeze_duration)
             collected = True
+        if hasattr(powerup, "pierce_duration"):
+            player.add_pierce(powerup.pierce_duration)
+            collected = True
+
+
     return collected
 

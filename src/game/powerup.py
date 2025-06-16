@@ -47,3 +47,12 @@ class FreezePowerUp(PowerUp):
         self.image.fill((173, 216, 230))
         self.freeze_duration = duration
 
+
+class PiercePowerUp(PowerUp):
+    """Power-up that lets bullets pierce through enemies."""
+
+    def __init__(self, position, duration=180):
+        super().__init__(position, heal_amount=0)
+        self.image.fill((138, 43, 226))
+        self.pierce_duration = duration
+

@@ -13,6 +13,7 @@ class Player(pygame.sprite.Sprite):
         self.speed_timer = 0
         self.triple_shot_timer = 0
         self.freeze_timer = 0
+        self.pierce_timer = 0
         self.base_speed = base_speed
 
     def take_damage(self, amount=1):
@@ -33,6 +34,10 @@ class Player(pygame.sprite.Sprite):
 
     def add_freeze(self, duration=180):
         self.freeze_timer = duration
+
+    def add_pierce(self, duration=180):
+        self.pierce_timer = duration
+
 
 
     def update(self):
@@ -58,6 +63,9 @@ class Player(pygame.sprite.Sprite):
             self.triple_shot_timer -= 1
         if self.freeze_timer > 0:
             self.freeze_timer -= 1
+        if self.pierce_timer > 0:
+            self.pierce_timer -= 1
+
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)
