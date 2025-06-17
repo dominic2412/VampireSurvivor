@@ -56,3 +56,12 @@ class PiercePowerUp(PowerUp):
         self.image.fill((138, 43, 226))
         self.pierce_duration = duration
 
+
+class HomingPowerUp(PowerUp):
+    """Power-up that makes bullets aim at the nearest enemy."""
+
+    def __init__(self, position, duration=180):
+        super().__init__(position, heal_amount=0)
+        self.image.fill((255, 215, 0))
+        self.homing_duration = duration
+

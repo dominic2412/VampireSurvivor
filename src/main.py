@@ -11,6 +11,7 @@ from game.powerup import (
     FreezePowerUp,
 
     PiercePowerUp,
+    HomingPowerUp,
 )
 
 from game.utils import (
@@ -86,12 +87,28 @@ def main():
                     enemies.add(Enemy(position))
             elif not paused and event.type == bullet_spawn_event:
                 bullet_kwargs = {"piercing": player.pierce_timer > 0}
+                direction = (0, -1)
+                if player.homing_timer > 0 and len(enemies) > 0:
+                    player_pos = pygame.math.Vector2(player.rect.center)
+                    nearest = min(
+                        enemies,
+                        key=lambda e: pygame.math.Vector2(e.rect.center).distance_to(player_pos),
+                    )
+                    vec = pygame.math.Vector2(nearest.rect.center) - player_pos
+                    if vec.length() != 0:
+                        direction = vec.normalize()
                 if player.triple_shot_timer > 0:
                     offsets = [-15, 0, 15]
                     for dx in offsets:
-                        bullets.add(Bullet((player.rect.centerx + dx, player.rect.centery), **bullet_kwargs))
+                        bullets.add(
+                            Bullet(
+                                (player.rect.centerx + dx, player.rect.centery),
+                                direction=direction,
+                                **bullet_kwargs,
+                            )
+                        )
                 else:
-                    bullets.add(Bullet(player.rect.center, **bullet_kwargs))
+                    bullets.add(Bullet(player.rect.center, direction=direction, **bullet_kwargs))
 
             elif not paused and event.type == powerup_spawn_event:
                 position = (
@@ -109,8 +126,10 @@ def main():
                     powerups.add(TripleShotPowerUp(position))
                 elif roll < 0.9:
                     powerups.add(FreezePowerUp(position))
-                else:
+                elif roll < 0.95:
                     powerups.add(PiercePowerUp(position))
+                else:
+                    powerups.add(HomingPowerUp(position))
 
 
         screen.fill((0, 0, 0))
@@ -164,6 +183,11 @@ def main():
                 f"Pierce: {player.pierce_timer // 60}", True, (138, 43, 226)
             )
             screen.blit(pierce_surf, (10, 160))
+        if player.homing_timer > 0:
+            homing_surf = font.render(
+                f"Homing: {player.homing_timer // 60}", True, (255, 215, 0)
+            )
+            screen.blit(homing_surf, (10, 190))
 
 
 

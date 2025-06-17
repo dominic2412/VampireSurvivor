@@ -52,6 +52,9 @@ def handle_player_powerup_collisions(player, powerups):
         if hasattr(powerup, "pierce_duration"):
             player.add_pierce(powerup.pierce_duration)
             collected = True
+        if hasattr(powerup, "homing_duration"):
+            player.add_homing(powerup.homing_duration)
+            collected = True
 
 
     return collected
