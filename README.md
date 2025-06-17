@@ -1,6 +1,6 @@
 # Vampire Survivor
 
-This repository contains a basic project setup for a simple Vampire Survivor style game written in Python using Pygame.  It is a very small MVP where enemies spawn over time and the player automatically fires small bullets.
+This repository contains a basic project setup for a simple Vampire Survivor style game written in Python using Pygame.  It is a very small MVP where enemies spawn over time and the player automatically fires small bullets that can now travel in any direction.
 
 ## Directory structure
 
@@ -37,6 +37,7 @@ Orange power-ups briefly boost your movement speed, shown with a timer when acti
 Pink power-ups activate a triple-shot mode letting you fire three bullets at once for a short time.
 Light-blue power-ups slow all enemies for a few seconds, displayed with its own timer.
 Purple power-ups let your bullets pierce through enemies for a few seconds.
+Gold power-ups cause bullets to home in on the nearest enemy for a short time, letting you attack foes in any direction.
 
 
 Enemy spawn frequency increases slightly as you rack up kills, but the game is

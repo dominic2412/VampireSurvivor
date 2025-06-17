@@ -15,6 +15,7 @@ from game.powerup import (
     TripleShotPowerUp,
     FreezePowerUp,
     PiercePowerUp,
+    HomingPowerUp,
 )
 
 
@@ -30,6 +31,13 @@ def test_bullet_moves_up():
     initial_y = b.rect.y
     b.update()
     assert b.rect.y == initial_y - 5
+
+
+def test_bullet_moves_in_given_direction():
+    b = Bullet((10, 10), direction=(1, 0), speed=5)
+    initial_x = b.rect.x
+    b.update()
+    assert b.rect.x == initial_x + 5
 
 
 def test_enemy_moves_toward_target():
@@ -113,6 +121,13 @@ def test_pierce_powerup_sets_timer():
     powerups = pygame.sprite.Group(PiercePowerUp(player.rect.center, duration=4))
     handle_player_powerup_collisions(player, powerups)
     assert player.pierce_timer == 4
+
+
+def test_homing_powerup_sets_timer():
+    player = Player()
+    powerups = pygame.sprite.Group(HomingPowerUp(player.rect.center, duration=5))
+    handle_player_powerup_collisions(player, powerups)
+    assert player.homing_timer == 5
 
 
 def test_piercing_bullet_survives_collision():
