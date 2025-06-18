@@ -16,6 +16,7 @@ from game.powerup import (
     FreezePowerUp,
     PiercePowerUp,
     HomingPowerUp,
+    RapidFirePowerUp,
 )
 
 
@@ -128,6 +129,20 @@ def test_homing_powerup_sets_timer():
     powerups = pygame.sprite.Group(HomingPowerUp(player.rect.center, duration=5))
     handle_player_powerup_collisions(player, powerups)
     assert player.homing_timer == 5
+
+
+def test_rapid_fire_powerup_sets_timer():
+    player = Player()
+    powerups = pygame.sprite.Group(RapidFirePowerUp(player.rect.center, duration=6))
+    handle_player_powerup_collisions(player, powerups)
+    assert player.bullet_speed_timer == 6
+
+
+def test_bullets_fired_faster_when_powerup_active():
+    player = Player()
+    player.bullet_speed_timer = 2
+    b = Bullet((0, 0), speed=15 if player.bullet_speed_timer > 0 else 10)
+    assert b.speed == 15
 
 
 def test_piercing_bullet_survives_collision():

@@ -55,6 +55,9 @@ def handle_player_powerup_collisions(player, powerups):
         if hasattr(powerup, "homing_duration"):
             player.add_homing(powerup.homing_duration)
             collected = True
+        if hasattr(powerup, "bullet_speed_duration"):
+            player.add_bullet_speed(powerup.bullet_speed_duration)
+            collected = True
 
 
     return collected

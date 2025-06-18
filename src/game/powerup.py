@@ -65,3 +65,12 @@ class HomingPowerUp(PowerUp):
         self.image.fill((255, 215, 0))
         self.homing_duration = duration
 
+
+class RapidFirePowerUp(PowerUp):
+    """Power-up that increases bullet speed for a short time."""
+
+    def __init__(self, position, duration=180):
+        super().__init__(position, heal_amount=0)
+        self.image.fill((192, 192, 192))
+        self.bullet_speed_duration = duration
+
