@@ -12,6 +12,7 @@ from game.powerup import (
 
     PiercePowerUp,
     HomingPowerUp,
+    RapidFirePowerUp,
 )
 
 from game.utils import (
@@ -86,7 +87,8 @@ def main():
                 else:
                     enemies.add(Enemy(position))
             elif not paused and event.type == bullet_spawn_event:
-                bullet_kwargs = {"piercing": player.pierce_timer > 0}
+                bullet_speed = 15 if player.bullet_speed_timer > 0 else 10
+                bullet_kwargs = {"piercing": player.pierce_timer > 0, "speed": bullet_speed}
                 direction = (0, -1)
                 if player.homing_timer > 0 and len(enemies) > 0:
                     player_pos = pygame.math.Vector2(player.rect.center)
@@ -128,6 +130,8 @@ def main():
                     powerups.add(FreezePowerUp(position))
                 elif roll < 0.95:
                     powerups.add(PiercePowerUp(position))
+                elif roll < 0.97:
+                    powerups.add(RapidFirePowerUp(position))
                 else:
                     powerups.add(HomingPowerUp(position))
 
@@ -188,6 +192,11 @@ def main():
                 f"Homing: {player.homing_timer // 60}", True, (255, 215, 0)
             )
             screen.blit(homing_surf, (10, 190))
+        if player.bullet_speed_timer > 0:
+            rapid_surf = font.render(
+                f"Rapid: {player.bullet_speed_timer // 60}", True, (192, 192, 192)
+            )
+            screen.blit(rapid_surf, (10, 220))
 
 
 

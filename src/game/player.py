@@ -15,6 +15,7 @@ class Player(pygame.sprite.Sprite):
         self.freeze_timer = 0
         self.pierce_timer = 0
         self.homing_timer = 0
+        self.bullet_speed_timer = 0
         self.base_speed = base_speed
 
     def take_damage(self, amount=1):
@@ -41,6 +42,10 @@ class Player(pygame.sprite.Sprite):
 
     def add_homing(self, duration=180):
         self.homing_timer = duration
+
+    def add_bullet_speed(self, duration=180):
+        """Increase bullet speed for a short time."""
+        self.bullet_speed_timer = duration
 
 
 
@@ -71,6 +76,8 @@ class Player(pygame.sprite.Sprite):
             self.pierce_timer -= 1
         if self.homing_timer > 0:
             self.homing_timer -= 1
+        if self.bullet_speed_timer > 0:
+            self.bullet_speed_timer -= 1
 
 
     def draw(self, surface):
