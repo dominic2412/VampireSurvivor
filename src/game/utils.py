@@ -58,6 +58,9 @@ def handle_player_powerup_collisions(player, powerups):
         if hasattr(powerup, "bullet_speed_duration"):
             player.add_bullet_speed(powerup.bullet_speed_duration)
             collected = True
+        if hasattr(powerup, "max_health_increase"):
+            player.increase_max_health(powerup.max_health_increase)
+            collected = True
 
 
     return collected

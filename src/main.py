@@ -11,6 +11,7 @@ from game.powerup import (
     FreezePowerUp,
 
     PiercePowerUp,
+    MaxHealthPowerUp,
     HomingPowerUp,
     RapidFirePowerUp,
 )
@@ -132,6 +133,8 @@ def main():
                     powerups.add(PiercePowerUp(position))
                 elif roll < 0.97:
                     powerups.add(RapidFirePowerUp(position))
+                elif roll < 0.98:
+                    powerups.add(MaxHealthPowerUp(position))
                 else:
                     powerups.add(HomingPowerUp(position))
 

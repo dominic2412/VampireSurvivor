@@ -15,6 +15,7 @@ from game.powerup import (
     TripleShotPowerUp,
     FreezePowerUp,
     PiercePowerUp,
+    MaxHealthPowerUp,
     HomingPowerUp,
     RapidFirePowerUp,
 )
@@ -143,6 +144,14 @@ def test_bullets_fired_faster_when_powerup_active():
     player.bullet_speed_timer = 2
     b = Bullet((0, 0), speed=15 if player.bullet_speed_timer > 0 else 10)
     assert b.speed == 15
+
+
+def test_max_health_powerup_increases_max_and_heals():
+    player = Player(health=3, max_health=5)
+    powerups = pygame.sprite.Group(MaxHealthPowerUp(player.rect.center, amount=1))
+    handle_player_powerup_collisions(player, powerups)
+    assert player.max_health == 6
+    assert player.health == 6
 
 
 def test_piercing_bullet_survives_collision():

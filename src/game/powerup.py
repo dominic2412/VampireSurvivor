@@ -74,3 +74,11 @@ class RapidFirePowerUp(PowerUp):
         self.image.fill((192, 192, 192))
         self.bullet_speed_duration = duration
 
+
+class MaxHealthPowerUp(PowerUp):
+    """Power-up that permanently increases max health."""
+
+    def __init__(self, position, amount=1):
+        super().__init__(position, heal_amount=0)
+        self.image.fill((255, 0, 255))
+        self.max_health_increase = amount
