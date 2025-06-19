@@ -39,6 +39,7 @@ Light-blue power-ups slow all enemies for a few seconds, displayed with its own 
 Purple power-ups let your bullets pierce through enemies for a few seconds.
 Gold power-ups cause bullets to home in on the nearest enemy for a short time, letting you attack foes in any direction.
 Silver power-ups temporarily increase the speed of your bullets, displayed with its own timer.
+Magenta power-ups permanently raise your maximum health by one and heal you.
 
 
 Enemy spawn frequency increases slightly as you rack up kills, but the game is

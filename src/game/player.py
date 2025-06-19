@@ -25,6 +25,11 @@ class Player(pygame.sprite.Sprite):
     def heal(self, amount=1):
         self.health = min(self.health + amount, self.max_health)
 
+    def increase_max_health(self, amount=1):
+        """Increase maximum health and heal the player."""
+        self.max_health += amount
+        self.health = self.max_health
+
     def add_shield(self, duration=180):
         self.shield_timer = duration
 
